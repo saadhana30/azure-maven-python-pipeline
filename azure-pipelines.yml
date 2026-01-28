@@ -1,8 +1,7 @@
 trigger:
 - main
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: Default
 
 stages:
 - stage: Build
@@ -11,9 +10,8 @@ stages:
   - job: BuildJob
     displayName: 'Build Job'
     steps:
-    - script: |
-        echo "Restoring project dependencies..."
-      displayName: 'Restore dependencies'
-    - script: |
-        echo "Running unit tests..."
-      displayName: 'Run unit tests'
+    - script: echo "Restoring project dependencies..."
+      displayName: Restore dependencies
+
+    - script: echo "Running unit tests..."
+      displayName: Run unit tests
