@@ -4,6 +4,7 @@ trigger:
 pool: Default
 
 stages:
+
 - stage: Build
   displayName: 'Build Stage'
   jobs:
@@ -15,3 +16,15 @@ stages:
 
     - script: echo "Running unit tests..."
       displayName: Run unit tests
+
+
+- stage: Test
+  displayName: 'Test Stage'
+  dependsOn: Build
+  isSkippable: false
+  jobs:
+  - job: TestJob
+    displayName: 'Test Job'
+    steps:
+    - script: echo "Running regression tests..."
+      displayName: Run tests
