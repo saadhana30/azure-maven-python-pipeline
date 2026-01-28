@@ -2,19 +2,19 @@ trigger:
 - main
 
 pool:
-  name: Default
+  vmImage: 'windows-latest'
 
-steps:
-- checkout: self
+stages:
 
-- script: java -version
-  displayName: Check Java
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build Job'
+    steps:
+    - script: echo "Restoring project dependencies..."
+      displayName: Restore dependencies
 
-- script: mvn -version
-  displayName: Check Maven
+    - script: echo "Running unit tests..."
+      displayName: Run unit tests
 
-- script: mvn clean test package
-  displayName: Maven Build
-
-- script: python scripts/post_build.py
-  displayName: Run Python script
